@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% extends 'store/main.html' %}
+    {% load static %}
+    
+    <link rel="stylesheet"  type="text/css" href="{% static 'css/main.css'">
+</head>
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="column">
+            <div class="box-element">
+                <a href="{% url 'store' %}">Continue Shopping</a>
+
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+                        <th><h5>Total: <strong>{{order.get_cart_total|floatformat:2}}</strong></h5></th>
+                        <th>
+                            <a href="{% url 'checkout' %}">Checkout</a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div class="box-element">
+                <div class="cart-row">
+                    <div></div>
+                    <div><strong>Item</strong></div>
+                    <div><strong>Price</strong></div>
+                    <div><strong>Quantity</strong></div>
+                    <div><strong>Total</strong></div>
+                </div>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div><img class="row-image", src="{{item.product.imageURL}}"></div>
+                    <div>{{item.product.name}}</div>
+                    <div>{{item.product.price|floatformat:2}}</div>
+                    <div>
+                        <p class="quantity">{{item.quantity}}</p>
+                        <div class="quantity">
+                            <img data-product={{item.prodcut.id}} data-action="add" class="chg-quantity update-cart", src="{% static 'images/arrow_up.png' %}">
+                            <img data-product={{item.prodcut.id}} data-action="remove" class="chg-quantity update-cart", src="{% static 'images/arrow_down.png' %}">
+                        </div>
+                    </div>
+                    <div>$40</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>
