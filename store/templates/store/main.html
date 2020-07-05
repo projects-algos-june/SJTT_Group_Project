@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ecom</title>
     {% load static %}
-    <link rel="stylesheet"  type="text/css" href="{% static 'css/main.css'">
-
+    <!--Skye: I commented out the main.css file in favor of using only materialize-->
+    <!--<link rel="stylesheet"  type="text/css" href="{% static 'css/main.css' %}'">-->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <script type="text/javascript">
         var user = '{{request.user}}'
         function getToken(name) {
@@ -29,29 +34,34 @@
 
 </head>
 <body>
-    <nav class="navbar">
-        <div>
-            <a href="{% url 'store' %}">Ecom</a>
-        </div>
-        <div>
-            <a href="{% url 'store' %}">Store</a>
-        </div>
-        <div>
-            <a href="{% url 'store' %}">Login</a>
-        </div>
-        <div>
-            <a href="{% url 'cart' %}">
-                <img id="cart-icon" src="{% static 'images/cart.png' %}">
-            </a>
-            <p>{{cartItems}}</p>
-        </div>
-        <hr>
-    </nav>
+    <div class="navbar-fixed">
+        <nav>
+            <div  class="nav-wrapper teal darken-4">
+                <a href="" class="brand-logo yellow-text text-darken-3 center" style="font-family:candara"><i class="material-icons">group_work</i>LUXE<i class="material-icons right">group_work</i></a>
+                <a href="" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons amber-text text-darken-1">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'store' %}" class="tooltipped waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="Ecom"><i class="material-icons">monetization_on</i></a></li>
+                    <li><a href="{% url 'store' %}" class="tooltipped waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="Store"><i class="material-icons">store</i></a></li>
+                    <li><a href="{% url 'store' %}" class="tooltipped waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="Account"><i class="material-icons">account_box</i></a></li>
+                    <li><a href="{% url 'cart' %}" class="tooltipped waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="View Cart"><i class="material-icons">shopping_cart</i></a></li>
+                </ul>
+                <!--<p>{{cartItems}}</p> -- Skye: I'm not sure why this was here?-->
+            </div>
+        </nav>
+    </div>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="{% url 'store' %}" class="waves-effect waves-light amber-text text-darken-1"><i class="material-icons">monetization_on</i>Ecom</a></li>
+        <li><a href="{% url 'store' %}" class="waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="Store"><i class="material-icons">store</i>Store</a></li>
+        <li><a href="{% url 'store' %}" class="waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="Account"><i class="material-icons">account_box</i>Account</a></li>
+        <li><a href="{% url 'cart' %}" class="waves-effect waves-light amber-text text-darken-1" data-position="bottom" data-tooltip="View Cart"><i class="material-icons">shopping_cart</i>Cart</a></li>
+    </ul>
     <div class="container">
         {% block content %}
         
         {% endblock content %}
     </div>
     <script type="text/javascript" src="{% static 'js/cart.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script>M.AutoInit();</script>
 </body>
 </html>
