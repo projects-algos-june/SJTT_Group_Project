@@ -12,40 +12,61 @@
 <body>
     
     {% block content %}
-    <div class="row">
+    <div class="container">
         {% for product in products %}
-        <div class="column">
-            <img src="{{product.imageURL}}">
-            <div class="box-element product">
-                <h6><strong>{{product.name}}</strong></h6>
-                <hr>
-                <button>Add to Cart</button>
-                <a href="#">View</a>
-                <h4>${{product.price|floatformat:2}}</h4>
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="{% static 'images/placeholder.png' %}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">{{product.name}}<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Product Name<i class="material-icons right">close</i></span>
+              <p>This is the finest of fine products. It features a complete set of features, is made of materials and provides endless enjoyment. Only the coolest people would want this product. For more information please view the full product page at: <p><a href="#">View Full Details</a></p></p>
+            </div>
+            <div class="card-action">
+                <button class="waves-effect waves-light btn teal darken-3 amber-text text-darken-1">Add to Cart</button>
+                <h4 class="right">${{product.price|floatformat:2}}</h4>
+                <p><a href="#" class="blue-text">View Full Details</a></p>
             </div>
         </div>
         {% endfor %}
-        <div class="column">
-            <img src="{% static 'images/placeholder.png' %}">
-            <div class="box-element product">
-                <h6><strong>Product</strong></h6>
-                <hr>
-                <button>Add to Cart</button>
-                <a href="#">View</a>
-                <h4>$20</h4>
+        <!-- Skye: I assume the below are sample products as no products are loaded into the database yet? I've left them for now, adding styling to them, please adjust as needed -->
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="{% static 'images/placeholder.png' %}">
             </div>
-        </div>
-        <div class="column">
-            <img src="{% static 'images/placeholder.png' %}">
-            <div class="box-element product">
-                <h6><strong>Product</strong></h6>
-                <hr>
-                <button date-product={{product.id}} data-action="add" class="update-cart">Add to Cart</button>
-                <a href="#">View</a>
-                <h4>$20</h4>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Product Name<i class="material-icons right">more_vert</i></span>
             </div>
-        </div>
-
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Product Name<i class="material-icons right">close</i></span>
+              <p>This is the finest of fine products. It features a complete set of features, is made of materials and provides endless enjoyment. Only the coolest people would want this product. For more information please view the full product page at: <p><a href="#">View Full Details</a></p></p>
+            </div>
+            <div class="card-action">
+                <button class="waves-effect waves-light btn teal darken-3 amber-text text-darken-1">Add to Cart</button>
+                <h4 class="right">$20</h4>
+                <p><a href="#" class="blue-text">View Full Details</a></p>
+            </div>
+          </div>
+        <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="{% static 'images/placeholder.png' %}">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Product Name<i class="material-icons right">more_vert</i></span>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Product Name<i class="material-icons right">close</i></span>
+              <p>This is the finest of fine products. It features a complete set of features, is made of materials and provides endless enjoyment. Only the coolest people would want this product. For more information please view the full product page at: <p><a href="#">View Full Details</a></p></p>
+            </div>
+            <div class="card-action">
+                <button class="waves-effect waves-light btn teal darken-3 amber-text text-darken-1">Add to Cart</button>
+                <h4 class="right">$20</h4>
+                <p><a href="#" class="blue-text">View Full Details</a></p>
+            </div>
+          </div>
     </div>
     {% endblock content %}
     
