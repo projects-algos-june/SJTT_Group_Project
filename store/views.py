@@ -105,3 +105,45 @@ def processOrder(request):
     else:
         print('User is not logged in...') 
     return JsonResponse('Payment complete!', safe=False)
+
+
+    # registrations info: 
+
+def regPage(request):
+    return render(request, 'reg.html')
+
+def registration(request):
+    errors = Customer.objects.validator(request.POST)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/reg')
+
+    hash_pw = bcrypt.hashpw(request.POST['password_input'].encode(), bcrypt.gensalt()).decode()
+
+    new_user= Customer.objects.create(first_name=request.POST['fn_input'], last_name=['ln_input'], email=request.POST['email_input'], password=hash_pw)
+
+    request.session['id'] = new_user.id 
+
+    return redirect('/')
+
+
+# login in info
+
+def login(request):
+    return render(request, 'login.html')
+
+def postLogin(request):
+    errors = Customer.objects.login_validator(request.POST)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/login')
+    user = Customer.objects.filter(email=request.POST['email_input'])
+    if user:
+        user_logged = user[0]
+        if bcrypt.checkpw(request.POST['password_input'].encode(), user_logged.password.encode()):
+            request.session['name'] = user_logged.first_name
+            request.session['id'] = user_logged.id 
+            return redirect('/')
+    return redirect('/')

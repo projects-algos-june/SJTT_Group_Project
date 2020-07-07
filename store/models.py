@@ -1,5 +1,37 @@
 from django.db import models
 from django.contrib.auth.models import User
+import re
+
+class UserManager(models.Manager):
+    def validator(self, postData):
+        errors = {}
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if len(postData['fn_input']) < 2:
+            errors ['first_name'] = "Please add First Name that contains more the two letters"
+        if len(postData['ln_input']) < 2:
+            errors ['last_name'] = "Please add a Last Name that contains more the two letters"
+        if not EMAIL_REGEX.match(postData['email_input']):
+            errors['email'] = 'Please enter a valid Email address!'
+        if len(postData['password_input']) < 5:
+             errors['password'] = 'Please enter an email that contains 5 or more character'
+        if postData['confirmpw_input'] != postData['password_input']:
+            errors['confirm_pw'] = "Your password and what you typed in comfirm pw dont match try agian"
+        return errors
+
+    def login_validator(self, postData):
+        errors = {}
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email_input']):
+            errors['email'] = 'Please enter a valid Email address!'
+        elif not postData['email_input'] != Customer.objects.filter('email'):
+            errors['email'] = 'Email not found !'
+
+
+        if len(postData['password_input']) < 5:
+             errors['password'] = 'Please enter an email that contains 5 or more character'
+        if postData['confirmpw_input'] != postData['password_input']:
+            errors['confirm_pw'] = "Your password and what you typed in comfirm pw dont match try agian"
+        return errors
 
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
