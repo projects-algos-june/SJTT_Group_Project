@@ -37,16 +37,17 @@
                         <div class="form-field">
                             <input type="text" name="zipcode" placeholder="Zip Code...">
                         </div>
-                       
-                        <div class="box-element" id="payment-info">
-                            <small>PayPal Pay Options</small>
-                            <div id="paypal-button-container"></div>
-                            <!-- <button id="make-payment">Make Payment</button> -->
-                        </div>
+                        <input type="submit" value="Continue">
+                           
                     </div>
                     
                     <hr>
-                    <input type="submit" value="Continue">
+                    <div class="box-element" id="payment-info">
+                        <small>PayPal Pay Options</small>
+                        <div id="paypal-button-container"></div>
+                        <!-- <button id="make-payment">Make Payment</button> -->
+                    </div>
+                    
                 </div>
             </form>
         </div>
@@ -85,7 +86,7 @@
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value: parseFloat(total). toFixed(2)
+                                value: '0.01'
                             }
                         }]
                     });
